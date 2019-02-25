@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link href="css/1.css" rel="stylesheet" />
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function() {
+				var main= document.getElementById("main");
+				var conter = document.getElementById('conter');
+				var shangyiye = document.getElementById('shangyiye');
+				var xiayiye = document.getElementById('xiayiye');
+				var buttons = document.getElementById('buttons').getElementsByTagName('span');
+				var index = 1;
+				var bianhuan;
+
+				function showButton() {
+					for(var i = 0; i < 5; i++) {
+						if(buttons[i].className == 'yuandian') {
+							buttons[i].className = '';
+							break;
+						}
+					}
+					buttons[index - 1].className = 'yuandian';
+				}
+
+				function lod(ok) {
+					var next = parseInt(conter.style.left) + ok;
+					var time = 400;
+					var cishu = 10;
+					var speed = ok / (time / cishu );
+
+					function trans() {
+						if((speed > 0 && parseInt(conter.style.left) < next) || (speed < 0 && parseInt(conter.style.left) > next)) {
+							conter.style.left = parseInt(conter.style.left) + speed + 'px';
+							setTimeout(trans, cishu );
+						} else {
+							conter.style.left = next+ 'px';
+							if(next > -1920) {
+								conter.style.left = -5760 + 'px';
+							}
+							if(next < -5760) {
+								conter.style.left = -1920 + 'px';
+							}
+						}
+					}
+					trans();
+				}
+
+				function pu() {
+					 bianhuan = setInterval(function() {
+						xiayiye.onclick();
+					}, 5760)
+				}
+				pu();
+				xiayiye.onclick = function() {
+					lod(-1920);
+					if(index == 3) {
+						index = 1;
+					} else {
+						index += 1;
+					}
+					showButton();
+				}
+				shangyiye.onclick = function() {
+					lod(1920);
+					if(index == 1) {
+						index = 3;
+					} else {
+						index -= 1;
+					}
+					showButton();
+				}
+				for(var i = 0; i < 5; i++) {
+					buttons[i].onclick = function() {
+						var xingde = parseInt(this.getAttribute('index'));
+						var ok = -1920 * (xingde - index);
+						lod(ok);
+						index = xingde;
+						showButton();
+					}
+				}
+
+			}
+		</script>
+	</head>
+	<body>
+		<div class="top">
+			<img src="img/logo.png" style="width: 299px;height: 80px;position: absolute;top: 10px;left: 85px;"/>
+			<span style="position: absolute;top: 28px;left: 572px;color: white;font-size: 25px;border-bottom: solid white 2px;">首页</span>
+			<a href="2.html"><span style="position: absolute;top: 28px;left: 712px;color: white;font-size: 25px;">进口食物展</span></a>
+			<span style="position: absolute;top: 28px;left: 922px;color: white;font-size: 25px;">美食评论区</span>
+			<span style="position: absolute;top: 28px;left: 1132px;color: white;font-size: 25px;">新吃法</span>
+			<span style="position: absolute;top: 28px;left: 1292px;color: white;font-size: 25px;">分享</span>
+		</div>
+		<div class="lunbo">
+			
+			<div id="main">
+			<div id="conter" style="left: -1920px;">
+				<div class="c3"></div>
+				<div class="c1"></div>
+				<div class="c2"></div>
+				<div class="c3"></div>
+				<div class="c1"></div>
+				</div>
+			<div id="buttons">
+				<span index="1" class="yuandian"></span>
+				<span index="2"></span>
+				<span index="3"></span>
+				</div>
+			<a href="javascript:;" class="button" id="shangyiye"><</a>
+			<a href="javascript:;" class="button" id="xiayiye">></a>
+		</div>
+
+		</div>
+		<div class="jieshao">
+			<span style="position: absolute;left: 116px;top: 835px;color: white;font-size: 60px;border-bottom:solid white 5px">网站介绍</span>
+			<img src="img/首页网站介绍.png" style="width: 786px;height: 500px;position: absolute;left: 1134px;top: 790px;" />
+			<p style="color: white;position: absolute;left: 200px;top: 950px;font-size: 36px;">IMPRODUCT是一个专注于吃货的网站，这里的东西除了</p><br />
+			<p style="color: white;position: absolute;left: 124px;top: 1010px;font-size: 36px;">吃的还是吃的，不过这里更多的是许多来自国外的小食品。</p><br />
+			<p style="color: white;position: absolute;left: 124px;top: 1070px;font-size: 36px;">这里有美味的食物新品发售，也有许许多多的新奇的食品推</p><br />
+			<p style="color: white;position: absolute;left: 124px;top: 1130px;font-size: 36px;">送。另外，在这个网站你还可以了解小食品的新吃法。</p>
+		</div>
+		<div class="news">
+			<img src="img/首页新闻动态.png" style="position: absolute;left: 0;top: 1291px;width: 786px;height: 500px;" />
+			<span style="position: absolute;left: 920px;top: 1344px;color: white;font-size: 60px;border-bottom:solid white 5px">新闻动态</span>
+			<p style="color: white;position: absolute;left: 920px;top: 1469px;font-size: 36px;">. 年度新品 进口食品套餐上市了</p><br />
+			<p style="color: white;position: absolute;left: 920px;top: 1529px;font-size: 36px;">. 可口可乐新玩法 你知道吗？</p><br />
+			<a href="news1.html"><p style="color: white;position: absolute;left: 920px;top: 1589px;font-size: 36px;">. 美味可口的泰国榴莲酥白菜价销售</p><br /></a>
+		</div>
+		<div class="bottom">
+			<p style="color: white;position: absolute;left: 494px;top: 1820px;font-size: 36px;">地址：XX市XX区XX路XX号|电话：18012345678</p><br />
+			<p style="color: white;position: absolute;left: 494px;top: 1880px;font-size: 36px;">邮箱：improduct@example.com</p><br />
+			<p style="color: white;position: absolute;left: 494px;top: 1940px;font-size: 36px;">合作单位：湘潭大学三翼工作室技术部、设计部</p><br />
+			<img src="img/flag.png" style="position: absolute;left: 494px;top: 2040px;width: 40px;height: 40px;"/>
+			<p style="color: white;position: absolute;left: 540px;top: 2000px;font-size: 36px;">湘公安网备12345678号</p><br />
+		</div>
+	</body>
+</html>
